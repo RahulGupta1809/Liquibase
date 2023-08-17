@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd">
+        
+        <!-- Creating New Table from CSV Data -->
+<changeSet id="CreateTableFromCSV" author="rahul">
+    <comment>Creating Table and Loading Data from CSV</comment>
+    <createTable tableName="employee_liquibase">
+        <column name="EMPLOYEE_ID" type="NUMERIC">
+            <constraints nullable="false"/>
+        </column>
+        <column name="EMPLOYEE_NAME" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="EMPLOYEE_EMAIL" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="EMPLOYEE_DESIGNATION" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="EMPLOYEE_PHONE_NUMBER" type="NUMERIC">
+            <constraints nullable="false"/>
+        </column>
+        <column name="EMPLOYEE_ADDRESS" type="VARCHAR(255)">
+            <constraints nullable="false"/>
+        </column>
+        <!-- Add more columns as needed -->
+    </createTable>
+    </changeSet>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Inserting Data -->
+	<changeSet id="MD7SUM" author="rahul">
+		<comment>Inserting Data</comment>
+		<insert tableName="employee_liquibase">
+			<column name="EMPLOYEE_ID">101</column>
+			<column name="EMPLOYEE_NAME">Rahul</column>
+			<column name="EMPLOYEE_EMAIL">Rahul@gmail.com</column>
+			<column name="EMPLOYEE_DESIGNATION">Software Developer</column>
+			<column name="EMPLOYEE_PHONE_NUMBER">7518362019</column>
+			<column name="EMPLOYEE_ADDRESS">Hyderabad</column>
+		</insert>
+		<insert tableName="employee_liquibase">
+			<column name="EMPLOYEE_ID">102</column>
+			<column name="EMPLOYEE_NAME">Vivek</column>
+			<column name="EMPLOYEE_EMAIL">vivek@example.com</column>
+			<column name="EMPLOYEE_DESIGNATION">Java Developer</column>
+			<column name="EMPLOYEE_PHONE_NUMBER">9589008971</column>
+			<column name="EMPLOYEE_ADDRESS">Harpalpur</column>
+		</insert>
+	</changeSet>
+
+	<!-- Updating Data -->
+	<changeSet id="MD8SUM" author="rahul">
+		<comment>Updating Data</comment>
+		<update tableName="employee_liquibase">
+			<column name="EMPLOYEE_NAME">varun</column>
+			<column name="EMPLOYEE_EMAIL">varun@example.com</column>
+			<column name="EMPLOYEE_DESIGNATION">Back-End Developer Developer</column>
+			<where>EMPLOYEE_ID = 105</where>
+		</update>
+	</changeSet>
+
+
+	<!-- Deleting Data -->
+	<changeSet id="MD6SUM" author="rahul">
+		<comment>Deleting Data</comment>
+		<delete tableName="employee_liquibase">
+			<where>EMPLOYEE_ID = 105</where>
+		</delete>
+	</changeSet>
+
+	<!-- Renaming Table -->
+	<changeSet id="MD9SUM" author="rahul">
+		<comment>Renaming Table</comment>
+		<renameTable oldTableName="employee_liquibase"
+			newTableName="new_employee_liquibase" />
+	</changeSet>
+
+
+
+	<!-- Adding Column And Update Column -->
+	<changeSet id="MD4SUM" author="rahul">
+		<comment>Adding Column And Update Column</comment>
+		<addColumn tableName="new_employee_liquibase">
+			<column name="EMPLOYEE_GENDER" type="VARCHAR(255)" />
+		</addColumn>
+		<addColumn tableName="new_employee_liquibase">
+			<column name="EMPLOYEE_PROJECT" type="VARCHAR(255)" />
+		</addColumn>
+		<!-- ... continue updating columns ... -->
+	</changeSet>
+
+	<!-- Drop Project Column -->
+	<changeSet id="7657-7" author="rahul">
+		<dropColumn tableName="new_employee_liquibase"
+			columnName="EMPLOYEE_PROJECT" />
+	</changeSet>
+
+	<!-- Drop Gender Column -->
+	<changeSet id="7657-8" author="rahul">
+		<dropColumn tableName="new_employee_liquibase"
+			columnName="EMPLOYEE_GENDER" />
+	</changeSet>
+
+	<!-- Deleting Data -->
+	<changeSet id="MD1SUM" author="rahul">
+		<comment>Deleting Data</comment>
+		<delete tableName="new_employee_liquibase">
+			<where>EMPLOYEE_ID = 5</where>
+		</delete>
+	</changeSet>
+
+	<!-- Adding Primary Key to EMPLOYEE_EMAIL -->
+	<changeSet id="MD2SUM" author="rahul">
+		<comment>Adding Primary Key to EMPLOYEE_EMAIL</comment>
+		<addPrimaryKey columnNames="EMPLOYEE_EMAIL"
+			constraintName="pk_employee_email" tableName="new_employee_liquibase" />
+	</changeSet>
+
+	<!-- Add column Employee_Image -->
+	<changeSet id="MD11SUM" author="rahul">
+		<comment>Adding Column EMPLOYEE_PHOTO</comment>
+		<addColumn tableName="new_employee_liquibase">
+			<column name="EMPLOYEE_IMAGE" type="VARCHAR(255)" />
+		</addColumn>
+	</changeSet>
+
+	<!-- Change DataType Employee_images Column -->
+	<changeSet id="MD12SUM" author="rahul">
+		<comment>Changing data type of EMPLOYEE_PHOTO column</comment>
+		<modifyDataType tableName="new_employee_liquibase"
+			columnName="EMPLOYEE_IMAGE" newDataType="BLOB(1000)" />
+	</changeSet>
+
+
+	<!-- Drop EMPLOYEE_IMAGE Column -->
+	<changeSet id="MD15SUM" author="rahul">
+		<dropColumn tableName="new_employee_liquibase"
+			columnName="EMPLOYEE_IMAGE" />
+	</changeSet>
+
+
+	<!-- INSERTING DATA FROM THE CSV FILE INTO DATABASE <changeSet id="MD16SUM" 
+		author="rahul"> <comment>Load data from CSV file</comment> <loadData file="classpath:csv/employee-liquibase.csv" 
+		separator="," tableName="new_employee_liquibase"> <column name="employee_id" 
+		type="NUMERIC" /> <column name="employee_name" type="STRING" /> <column name="employee_email" 
+		type="STRING"/> <column name="employee_designation" type="STRING" /> <column 
+		name="employee_phone_number" type="NUMERIC" /> <column name="employee_address" 
+		type="STRING" /> </loadData> </changeSet> -->
+
+
+	<!-- INSERTING New DATA FROM THE CSV FILE INTO DATABASE <changeSet id="MD20SUM" 
+		author="rahul"> <comment>Update data from CSV file</comment> <loadData file="classpath:csv/employee-liquibase.csv" 
+		separator=";" tableName="new_employee_liquibase"> <column name="employee_id" 
+		type="NUMERIC" /> <column name="employee_name" type="STRING" /> <column name="employee_email" 
+		type="STRING" /> <column name="employee_designation" type="STRING" /> <column 
+		name="employee_phone_number" type="NUMERIC" /> <column name="employee_address" 
+		type="STRING" /> </loadData> </changeSet> -->
+
+	<changeSet id="AddPrimaryKey" author="rahul">
+		<addPrimaryKey columnNames="employee_email"
+			constraintName="pk_employee_email" tableName="new_employee_liquibase" />
+	</changeSet>
+
+	<!-- <changeSet id="UpdateDataFromCSV" author="rahul"> <comment>Update data 
+		from CSV file</comment> <loadData file="classpath:csv/employee-liquibase.csv" 
+		separator=";" tableName="new_employee_liquibase"> <column name="EMPLOYEE_ID" 
+		type="NUMERIC" /> <column name="EMPLOYEE_NAME" type="STRING" /> <column name="EMPLOYEE_EMAIL" 
+		type="STRING" /> <column name="EMPLOYEE_DESIGNATION" type="STRING" /> <column 
+		name="EMPLOYEE_PHONE_NUMBER" type="NUMERIC" /> <column name="EMPLOYEE_ADDRESS" 
+		type="STRING" /> Add more columns here if needed </loadData> </changeSet> -->
+
+
+      
+	<!-- <changeSet id="MD91SUM" author="rahul">
+		<comment>Update data from CSV file</comment>
+		<loadUpdateData
+			file="classpath:csv/employee-liquibase.csv"
+			primaryKey="EMPLOYEE_EMAIL" separator=";"
+			tableName="new_employee_liquibase">
+			<column name="EMPLOYEE_ID" type="NUMERIC" />
+			<column name="EMPLOYEE_NAME" type="STRING" />
+			<column name="EMPLOYEE_EMAIL" type="STRING" />
+			<column name="EMPLOYEE_DESIGNATION" type="STRING" />
+			<column name="EMPLOYEE_PHONE_NUMBER" type="NUMERIC" />
+			<column name="EMPLOYEE_ADDRESS" type="STRING" />
+			
+		</loadUpdateData>
+	</changeSet> 
+	--> 
+
+</databaseChangeLog>
