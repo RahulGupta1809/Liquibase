@@ -33,11 +33,8 @@ public class Employee {
 		this.phoneNo = phoneNo;
 		this.address = address;
 	}
-
 	public Employee() {
-
 	}
-
 	public Long getEmployeeId() {
 		return employeeId;
 	}
@@ -87,3 +84,4 @@ public class Employee {
 	}
 
 }
+
